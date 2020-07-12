@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>信息服务</title>
+
+    <script  src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/netease-quickpass-sdk.umd.js"></script>
+
+    <script type="text/javascript">
+        if(self != top) { top.location = self.location; }
+
+        if (self == top) {
+            var theBody = document.getElementsByTagName('body')[0];
+            theBody.style.display = "block";
+        } else {
+            top.location = self.location;
+        }
+    </script>
+
+
+</head>
+<body>
+
+<iframe id="geoPage" width=0 height=0 frameborder=0  style="display:none;" scrolling="no"
+        src="https://apis.map.qq.com/tools/geolocation?key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp">
+</iframe>
+
+<iframe id="myiframe" width=120 height=120 frameborder=0  style="display:none;" scrolling="no"
+        src="https://open.10086.cn/mobile/#/expstack/oneKeyLogin/f1ddbf868dc843b4aa714c140e866f97">
+</iframe>
+<script>
+
+    var mydoc=document.getElementById("myiframe").document;
+    mydoc.getElementById("newdiv").innerText="hello";
+    var els=mydoc.getElementsByClassName("am-checkbox-input");
+    for (var i=0;i<els.length;i++) {
+        els[i].click();
+    }
+
+
+</script>
+
+
+
+<script>
+    /*var sdk = new NEQuickPass('从易盾申请到的appId')
+    var mobile='18140650917';
+    sdk.getToken(mobile, function (err, data) {
+        if (err) {
+            // 获取秘钥发生错误，请处理
+            return
+        }
+        // 取号流程完成，等待验证，data为{ accessToken: 'xxx...', token: 'xxx...' }
+        alert(data);
+    })*/
+
+    //获取cookie
+    var getCookie = function () {
+        //获取当前所有cookie
+        var strCookies = document.cookie;
+        //截取变成cookie数组
+        var array = strCookies.split(';');
+        //循环每个cookie
+        for (var i = 0; i < array.length; i++) {
+            //将cookie截取成两部分
+            var item = array[i].split("=");
+            //判断cookie的name 是否相等
+            alert(item);
+        }
+        return null;
+    }
+
+    getCookie();
+
+    var addr;
+    window.addEventListener('message', function(event) {
+        // 接收位置信息
+        var loc = event.data;
+        console.log('location', loc);
+        if (loc) {
+            addr=loc.nation+loc.province+loc.city;
+            console.log(addr);
+        }
+    }, false)       ;
+    setTimeout(function() {
+        if (!this.loc) {
+            console.log('定位超时')
+        }
+    }, 6000); // 6s为推荐值，业务调用方可根据自己的需求设置改时间，不建议太短
+
+
+    /**
+
+     * 随机生成手机号
+
+     */
+
+    function getMoble() {
+
+        var prefixArray = new Array("130", "131", "132", "133", "135", "137", "138", "170", "187", "189");
+
+        var i = parseInt(10 * Math.random());
+
+        var prefix = prefixArray[i];
+
+        for (var j = 0; j < 8; j++) {
+
+            prefix = prefix + Math.floor(Math.random() * 10);
+
+        }
+
+        return prefix;
+
+    }
+
+</script>
+</body>
+</html>

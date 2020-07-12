@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!--JQuery在线引用-->
+    <!--<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
+</head>
+<body>
+
+<input type="text" id="num">
+
+<input type="button" id="submit" value="查询数据" onclick="searchAlarmDataByAjax()"></input>
+
+<div id="content">
+
+</div>
+
+
+<script type="text/javascript">
+
+
+    function searchAlarmDataByAjax(){
+
+        // $('#content').empty();
+        // var num=$("#num").value;
+        var content=document.getElementById('content');
+        var num=document.getElementById('num').value;
+        alert("查询id："+num);
+        $.ajax({
+            url:"http://yishuizhichuan.com:7002/pages/hot-keywords?num="+num,
+            type:'get',
+            dataType:'json',
+            // contentType:"application/json;charset=utf-8",
+            // data:{"projectCode":projectCode},
+            success:function(data){
+                var  result='';
+
+
+                // $('#content').append(data);
+                content.append(data);
+
+
+
+            }
+        });
+    }
+
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>移动端测试</title>
+</head>
+<body>
+
+<!--style="display:none;"-->
+<div  id="weixin-share" data-desc="惠州新房网、惠州房产网、惠州团购网">测试</div>
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+<script>
+    $(function(){
+        $('.detail-go-back,.go-back').on('touchend',function(){
+            window.history.back();
+        }) ;
+        var img_url = "http://m.huifang168.com//uploads/setting/20180725/f36835c6ef606cec1d291d6557da5459.png";
+        var shareData = {
+            title: "惠州新房网、惠州房产网、惠州团购网_开发商网上直销售楼处",
+            link: window.location.href,
+            desc: $("#weixin-share").data('desc'),
+            imgUrl: img_url,
+            success:function(){
+
+            }
+        };
+        var jssdkconfig = [] || { jsApiList:[] };
+        wx.config(jssdkconfig);
+        wx.ready(function () {
+            wx.onMenuShareAppMessage(shareData);
+            wx.onMenuShareTimeline(shareData);
+            wx.onMenuShareQQ(shareData);
+            wx.onMenuShareWeibo(shareData);
+        });
+    });
+</script>
+</body>
+</html>
